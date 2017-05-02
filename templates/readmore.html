@@ -1,0 +1,24 @@
+<!--阅读更多-->
+<section class="read-more">
+  {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+    <div class=" pure-menu-horizontal pure-menu-open">
+
+        {% if post_list.has_previous %}
+          <div class="read-more-left">
+              <a style="float:left; margin:0 auto;" class="btn-border-small" href="?page={{ post_list.previous_page_number }}">
+              上一页
+              </a>
+          </div>
+        {% endif %}
+
+        {% if post_list.has_next %}
+          <div class="read-more-right">
+            <a style="float:right; margin:0 auto;" class="btn-border-small" href="?page={{ post_list.next_page_number }}">
+            下一页
+            </a>
+          </div>
+        {% endif %}
+
+    </div>
+  {% endif %}
+</section>

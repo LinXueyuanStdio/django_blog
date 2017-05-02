@@ -2,23 +2,24 @@
 
 {% block pagetitle %}
   {% for post in post_list %}
-  <title>{{ post.category }}</title>
+  <title>{{ post.tag }}</title>
   {% endfor %}
 {% endblock %}
 
 {% block content %}
   <div class="blog-post">
     {% for post in post_list %}
-      <h2 class="blog-post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
-        <p class="blog-post-meta">
-          发布：<a class="btn btn-xs btn-info">{{ post.date_time | date:'Y/m/d' }}</a>&nbsp;&nbsp;
-          目录：<a class="btn btn-xs btn-info" href="{% url 'search_tag' post.category %}">{{ post.category | title}}</a>&nbsp;&nbsp;
-          标签：
+      <h3 class="blog-post-title">
+        <a href="{% url 'detail' id=post.id %}">{{ post.title }}</a>
+      </h3>
+      <p class="post-meta">
+          <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
+          &#8226; 
           {% for tag in post.tag.all %}
-            <a class="btn btn-xs btn-info" href="">{{ tag }}</a></p>
+            <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
           {% endfor %}
-        </p>
-        <br />
+      </p>
+      <br />
     {% endfor %}
   </div><!-- /.blog-post -->
 {% endblock %}

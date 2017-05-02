@@ -3,43 +3,43 @@
 {% load custom_markdown %}
 {% block content %}
 <div class="posts">
-    {% for post in post_list %}
-        <section class="post">
-            <header class="post-header">
-                <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
+    <form class="pure-form pure-menu-horizontal" action="/search/" method="get">
+      <input class="pure-input-2-2" type="text" name="s" placeholder="search">
+    </form>
 
-                    <p class="post-meta">
-                        Time: <a class="post-author" href="#">{{ post.date_time |date:'Y M d'}}</a>&nbsp;&nbsp;
-                        Category: <a class="post-category post-category-pure" href="{% url 'search_tag' tag=post.category %}">{{ post.category|title }}</a>&nbsp;&nbsp;
-                        Tag:
-                          {% for tag in post.tag.all %}
-                            <a class="post-category post-category-pure" href="#">{{ tag }}</a>
-                          {% endfor %}
-                    </p>
-            </header>
+    <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+      <section class="post">
+        <hr>
+      </section>
+      {% for post in post_list %}
+      <section class="post">
+          <header class="post-header">
+              <h3 class="post-title">
+                <a href="{% url 'detail' id=post.id %}">{{ post.title }}</a>
+              </h3>
+              
+          </header>
 
-            <div class="post-description">
-                <p>
-                    {{ post.content|custom_markdown|truncatewords_html:100 }}
-                </p>
-            </div>
-            <a class="pure-button" href="{% url 'detail' id=post.id %}">Read More >>> </a>
-        </section>
-    {% endfor %}
+          <div class="excerpt post-description">
+            <p>
+              {{ post.content|custom_markdown|truncatewords_html:100 }}
+            </p>
+          </div>
+          <p class="post-meta">
+            <a class="btn-border-small" href="{% url 'detail' id=post.id %}">Read More >>></a>
+            &emsp;&emsp;
+            <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
+             &#8226; 
+            {% for tag in post.tag.all %}
+              <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
+            {% endfor %}
+          </p>
+          <hr class="post-list__divider" />
+      </section>
+      {% endfor %}
+    </article>
 
-    {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
-      <div class="pure-menu pure-menu-horizontal pure-menu-open">
-          <ul class="pager">
-          {% if post_list.has_previous %}
-            <li><a class="pure-button" href="?page={{ post_list.previous_page_number }}">上一页</a></li>
-          {% endif %}
-
-          {% if post_list.has_next %}
-            <li><a class="button-success pure-button" href="?page={{ post_list.next_page_number }}">下一页</a></li>
-          {% endif %}
-          </ul>
-      </div>
-    {% endif %}
+    {% include 'readmore.html' %}
 </div><!-- /.blog-post -->
 {% endblock %}      
             
