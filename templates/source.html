@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts">
+    
+    {% for post_class in post_class_list %}
+        <div class="row" style="text-align:center">  
+            <h3>{{post_class.src_class}}</h3>
+            <p><small>{{post_class.intro}}</small></p>
+        </div>
+        
+        <div class="row-border" style="text-align:center;"> 
+            <ol class="list-inline">
+            
+            {% for post in post_list %}
+{% ifequal post_class.src_class post.src_class.src_class %}
+            
+                <li>
+                    <a class="btn-border-small btn-default" target="_blank" href="{{ post.src_url }}" role="button" title="{{ post.src_hint }}">
+                        {{ post.src_title }}
+                        {% if post.src_marks %}
+                        <a class="post-category post-category-pure badge try8-remark">
+                            {{ post.src_marks }}
+                        </a>
+                        {% endif %}
+                    </a>
+                </li>
+{% endifequal %}
+            {% endfor %}
+            </ol>
+        </div>
+        <div style="margin-bottom: 80px"></div>
+    {% endfor %}
+
+</div><!-- /.blog-post -->
+
+{% endblock %}    
+
+<div class="marketing">
+  
+  <div class="row-border" style="text-align:center;">  
+    <div id="site-1" >
+      <ul class="list-inline">
+        <li><a class="btn btn-default" target="_blank" href="https://www.w3.org/" role="button" title=" 英文网址： https://www.w3.org/">W3C<span class="badge try8-remark">官方网站</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://www.runoob.com/" role="button" title="中文网址：http://www.runoob.com/">菜鸟教程<span class="badge try8-remark">在线文档</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://www.bootcss.com/" role="button" title="中文网址：http://www.bootcss.com/">Bootstrap<span class="badge try8-remark">前端框架</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://www.qdfuns.com/" role="button" title="中文网址：http://www.qdfuns.com/">前端网<span class="badge try8-remark">综合社区</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="https://jquery.com/" role="button" title=" 英文网址： https://jquery.com/">jQuery<span class="badge try8-remark">JS框架</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://960.gs/" role="button" title=" 英文网址： http://960.gs/">960 Grid System<span class="badge try8-remark">CSS框架</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://www.cssmoban.com/" role="button" title="中文网址：http://www.cssmoban.com/">模板之家<span class="badge try8-remark">模板下载</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://fontawesome.io/" role="button" title=" 英文网址： http://fontawesome.io/">Font Awesome<span class="badge try8-remark">图片图标</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://mobilehtml5.org/" role="button" title=" 英文网址： http://mobilehtml5.org/">HTML5 compatibility<span class="badge try8-remark">兼容测试</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="https://dribbble.com/" role="button" title=" 英文网址： https://dribbble.com/">Dribbble<span class="badge try8-remark">UI设计</span></a></li>
+        <li><a class="btn btn-default" target="_blank" href="http://www.sublimetext.com/" role="button" title=" 英文网址： http://www.sublimetext.com/">Sublime Text<span class="badge try8-remark">开发工具</span></a></li>
+    
+      </ul>
+    </div>
+  </div>  
+</div>

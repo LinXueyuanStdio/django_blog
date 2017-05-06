@@ -22,7 +22,7 @@
 
           <div class="excerpt post-description">
             <p>
-              {{ post.content|custom_markdown|truncatewords_html:100 }}
+              {{ post.content|custom_markdown| truncatechars_html:200 }}
             </p>
           </div>
           <p class="post-meta">

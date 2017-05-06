@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-  
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.syndication.views import Feed
-from blog.models import Article
-from blog.models import Tag
+from blog.models import Article, Tag, History, Source, SourceClass
 from datetime import datetime
 
 site = {
@@ -17,7 +17,7 @@ site = {
     'nav' : [
         {'title':u'GitHub', 'url':'https://github.com/LinXueyuanStdio', 'description':"description", 'in_site':False},
         {'title':u'目录', 'url':'archives', 'description':"description", 'in_site':True},
-        {'title':u'基友', 'url':'RSS', 'description':"description", 'in_site':True},
+        {'title':u'资源', 'url':'source', 'description':"description", 'in_site':True},
         {'title':u'RSS', 'url':'RSS', 'description':"description", 'in_site':True},
         {'title':u'关于', 'url':'about_me', 'description':"description", 'in_site':True}
     ],
@@ -38,7 +38,7 @@ def base(request):
 
 def home(request):
     posts = Article.objects.all()  #获取全部的Article对象
-    paginator = Paginator(posts, 2) #每页显示两个
+    paginator = Paginator(posts, 10) #每页显示两个
     pages = request.GET.get('page')
     page = {'layout':'post'}
     try :
@@ -72,7 +72,22 @@ def detail(request, id):
 
 def about_me(request) :
     page = {'layout':'post'}
-    return render(request, 'aboutme.html', {'site':site, 'page':page})
+    try:
+        post_list = History.objects.all()
+    except History.DoesNotExist :
+        raise Http404
+    return render(request, 'aboutme.html', {'post_list': post_list, 'site':site, 'page':page})
+
+def source(request) :
+    page = {'layout':'post'}
+    try:
+        post_class_list = SourceClass.objects.all()
+        post_list = Source.objects.all()
+    except Source.DoesNotExist :
+        raise Http404
+    return render(request, 'source.html', {'post_class_list':post_class_list,
+        'post_list': post_list, 'site':site, 'page':page})
+
 
 def search_tag(request, tag) :
     page = {'layout':'post'}

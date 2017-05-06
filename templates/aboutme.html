@@ -3,6 +3,16 @@
 
 {% block content %}
 <div class="posts">
-        <p> About Me 正在建设中 </p>
+    <ol class="time-line">
+        {% for post in post_list %}
+            <li>
+                <p class="post-meta">
+                    <a class="post-list__meta--date date" href="{{ post.raw_url }}">{{ post.date_time |date:'Y M d h:m a'}}</a>
+                    &#8226; 
+                      <a class="post-category post-category-pure" href="{{ post.raw_url }}">{{ post.things }}</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ol>
 </div><!-- /.blog-post -->
 {% endblock %}     

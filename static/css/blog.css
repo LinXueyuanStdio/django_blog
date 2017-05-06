@@ -120,6 +120,7 @@ h3 {
         background: #5aba59;
     }
     .post-category-pure {
+        border-radius: 5px;
         background: #4d85d1;
     }
     .post-category-yui {

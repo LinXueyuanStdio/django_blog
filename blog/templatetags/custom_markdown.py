@@ -5,6 +5,8 @@ from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
+
+
 register = template.Library()  #自定义filter时必须加上
 
 # @符号开始的代码不是注释
@@ -12,6 +14,10 @@ register = template.Library()  #自定义filter时必须加上
 @stringfilter  #希望字符串作为参数
 def custom_markdown(value):
     return mark_safe(markdown.markdown(value,
-        extensions = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite'],
-                                       safe_mode=True,
-                                       enable_attributes=False))
+        extensions = [
+        	'markdown.extensions.fenced_code', 
+        	'markdown.extensions.codehilite',
+        	'mdx_math'
+        ],
+        safe_mode=True,
+        enable_attributes=False))

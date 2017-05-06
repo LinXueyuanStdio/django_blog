@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-  
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -30,5 +31,6 @@ urlpatterns = [
     url(r'^aboutme/$', views.about_me, name = 'about_me'),
     url(r'^tag(?P<tag>\w+)/$', views.search_tag, name = 'search_tag'),
     url(r'^search/$', views.blog_search, name = 'search'),
+    url(r'^source/$', views.source, name = 'source'),
     url(r'^feed/$', RSSFeed(), name = "RSS"),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
