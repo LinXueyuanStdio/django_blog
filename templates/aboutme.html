@@ -7,7 +7,7 @@
         {% for post in post_list %}
             <li>
                 <p class="post-meta">
-                    <a class="post-list__meta--date date" href="{{ post.raw_url }}">{{ post.date_time |date:'Y M d h:m a'}}</a>
+                    <a class="post-list__meta--date date" href="{{ post.raw_url }}">{{ post.date_time |date:'Y M d H:i a'}}</a>
                     &#8226; 
                       <a class="post-category post-category-pure" href="{{ post.raw_url }}">{{ post.things }}</a>
                 </p>

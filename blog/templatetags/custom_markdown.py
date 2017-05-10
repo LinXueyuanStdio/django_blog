@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-  
 import markdown
 
 from django import template
