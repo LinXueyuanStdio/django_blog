@@ -3,25 +3,26 @@
 
 {% block content %}
 <div class="posts">
-        <section class="post">
-            <header class="post-header">
-                <h3 class="post-title">{{ post.title }}</h3>
+    <section class="post">
+        <header class="post-header">
+            <h3 class="post-title">{{ post.title }}</h3>
 
-                    <p class="post-meta">
-                        <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
-                        &#8226; 
-                        {% for tag in post.tag.all %}
-                          <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
-                        {% endfor %}
-                    </p>
-            </header>
-
-                <div class="post-description">
-                    <p>
-                        {{ post.content|custom_markdown  }}
-                    </p>
-                </div>
-        </section>
-        {% include "duoshuo.html" %}
+                <p class="post-meta">
+                    <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
+                    &#8226; 
+                    {% for tag in post.tag.all %}
+                      <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
+                    {% endfor %}
+                </p>
+        </header>
+        
+        <div class="post-description">
+            <p>
+                {{ post.content|custom_markdown  }}
+            </p>
+        </div>
+    </section>
+    {% include "comment.html" %}
+    {% include "duoshuo.html" %}
 </div><!-- /.blog-post -->
 {% endblock %}     

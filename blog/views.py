@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.syndication.views import Feed
 from blog.models import Article, Tag, History, Source, SourceClass
 from datetime import datetime
+from comments.forms import CommentForm
 
 site = {
     'title' : u"XiChen",
@@ -66,9 +67,17 @@ def detail(request, id):
     try:
         post = Article.objects.get(id=str(id))
         tags = post.tag.all()
+        # 记得在顶部导入 CommentForm
+        form = CommentForm()
+        # 获取这篇 post 下的全部评论
+        comment_list = post.comment_set.all()
+         # 将文章、表单、以及文章下的评论列表作为模板变量传给 detail.html 模板，以便渲染相应数据。
+        context = {'post':post, 'tags':tags, 
+                    'site':site, 'page':page,
+                    'form':form, 'comment_list':comment_list}
     except Article.DoesNotExist:
         raise Http404
-    return render(request, 'post.html', {'post' : post, 'tags': tags, 'site':site, 'page':page})
+    return render(request, 'post.html', context)
 
 def about_me(request) :
     page = {'layout':'post'}
