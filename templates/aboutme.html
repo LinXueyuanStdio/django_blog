@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% load custom_markdown %}
 
@@ -15,4 +16,23 @@
         {% endfor %}
     </ol>
 </div><!-- /.blog-post -->
+=======
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+{% block content %}
+<div class="posts">
+    <ol class="time-line">
+        {% for post in post_list %}
+            <li>
+                <p class="post-meta">
+                    <a class="post-list__meta--date date" href="{{ post.raw_url }}">{{ post.date_time |date:'Y M d H:i a'}}</a>
+                    &#8226; 
+                      <a class="post-category post-category-pure" href="{{ post.raw_url }}">{{ post.things }}</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ol>
+</div><!-- /.blog-post -->
+>>>>>>> ff8e9f3db63df1d39971801878e9d2638e734924
 {% endblock %}     
