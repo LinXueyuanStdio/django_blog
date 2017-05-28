@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-  
 from __future__ import unicode_literals
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
