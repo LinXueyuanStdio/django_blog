@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^search/$', views.blog_search, name = 'search'),
     url(r'^source/$', views.source, name = 'source'),
     url(r'^feed/$', RSSFeed(), name = "RSS"),
-    url(r'', include('comments.urls')),
+    url(r'', include('comments.urls', namespace="comments")),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
