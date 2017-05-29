@@ -3,43 +3,42 @@
 {% load custom_markdown %}
 {% block content %}
 <div class="posts">
-    <form class="pure-form pure-menu-horizontal" action="/search/" method="get">
-      <input class="pure-input-2-2" type="text" name="s" placeholder="search">
-    </form>
+  <form class="pure-form pure-menu-horizontal" action="/search/" method="get">
+    <input class="pure-input-2-2" type="text" name="s" placeholder="search">
+  </form>
+  <section class="post-hr">
+    <hr>
+  </section>
+  <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    {% for post in post_list %}
+    <section class="post">
+      <header class="post-header">
+        <h2 class="post-title">
+          <a href="{% url 'detail' id=post.id %}" title="{{ post.title }}">{{ post.title }}</a>
+        </h2>
+      </header>
 
-    <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
-      <section class="post">
-        <hr>
-      </section>
-      {% for post in post_list %}
-      <section class="post">
-          <header class="post-header">
-              <h3 class="post-title">
-                <a href="{% url 'detail' id=post.id %}">{{ post.title }}</a>
-              </h3>
-              
-          </header>
+      <div class="excerpt post-description post-content">
+        <p>
+          {{ post.content|custom_markdown| truncatechars_html:200 }}
+        </p>
+      </div>
 
-          <div class="excerpt post-description">
-            <p>
-              {{ post.content|custom_markdown| truncatechars_html:200 }}
-            </p>
-          </div>
-          <p class="post-meta">
-            <a class="btn-border-small" href="{% url 'detail' id=post.id %}">Read More >>></a>
-            &emsp;&emsp;
-            <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
-             &#8226; 
-            {% for tag in post.tag.all %}
-              <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
-            {% endfor %}
-          </p>
-          <hr class="post-list__divider" />
-      </section>
-      {% endfor %}
-    </article>
-
-    {% include 'readmore.html' %}
+      <p class="post-readmore ">
+        <a class="btn-border-small" href="{% url 'detail' id=post.id %}">Read More >>></a>
+        &emsp;&emsp;<i class="fa fa-calendar"></i>
+        <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
+         &#8226; 
+        {% for tag in post.tag.all %}
+          <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
+        {% endfor %}
+      </p>
+    </section>
+    {% endfor %}
+  </article>
+  {% include 'readmore.html' %}
+  {% include 'side-bar.html' %}
 </div><!-- /.blog-post -->
+
 {% endblock %}      
-            
