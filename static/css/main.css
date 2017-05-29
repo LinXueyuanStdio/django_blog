@@ -441,8 +441,8 @@ hr {
 }
 
 .post .post-content p {
-  padding: 0 13px 0 0;
-  margin: 0 2px 0 0;
+  padding: 0;
+  margin: 0;
 }
 
 .post .post-readmore {
@@ -464,7 +464,7 @@ hr {
   text-align: center;
   display: block; }
 .post pre {
-  width: 95%;
+  width: 100%;
   overflow: auto; }
 .post-hr hr {
   display: block;
