@@ -34,4 +34,5 @@ urlpatterns = [
     url(r'^source/$', views.source, name = 'source'),
     url(r'^feed/$', RSSFeed(), name = "RSS"),
     url(r'', include('comments.urls', namespace="comments")),
+    url(r'^api/', include('task.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'blog',
     'comments',
+    'rest_framework',
+    'task',
     'blog.templatetags.custom_markdown',
 ]
 
