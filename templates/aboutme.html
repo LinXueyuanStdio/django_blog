@@ -9,7 +9,7 @@
                 <p class="post-meta">
                     <a class="post-list__meta--date date" href="{{ post.raw_url }}">{{ post.date_time |date:'Y M d H:i a'}}</a>
                     &#8226; 
-                      <a class="post-category post-category-pure" href="{{ post.raw_url }}">{{ post.things }}</a>
+                      <a class="post-category post-category-pure" href="{{ post.raw_url }}" style="display:inline-block;">{{ post.things }}</a>
                 </p>
             </li>
         {% endfor %}

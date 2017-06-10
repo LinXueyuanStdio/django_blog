@@ -35,38 +35,48 @@ site = {
 
 def base(request):
     page = {'layout':'no'}
-    return render(request, 'base.html', {'site':site, 'page':page})
+    return render(request, 'base.html', {'site':site, 'page':page })
 
 def home(request):
     posts = Article.objects.all()  #获取全部的Article对象
     paginator = Paginator(posts, 10) #每页显示两个
     pages = request.GET.get('page')
     page = {'layout':'post'}
+    allTags = Tag.objects.all()
+    latest_10_Articles = Article.objects.all().order_by('-date_time')[:10]
     try :
         post_list = paginator.page(pages)
     except PageNotAnInteger :
         post_list = paginator.page(1)
     except EmptyPage :
         post_list = paginator.paginator(paginator.num_pages)
-    return render(request, 'home.html', {'post_list' : post_list,'site':site, 'page':page})
+    return render(request, 'home.html', {'post_list' : post_list,
+                    'site':site, 'page':page,
+                    'allTags':allTags, 'latest_10_Articles':latest_10_Articles})
 
 def archives(request) :
     page = {'layout':'post'}
     try:
         post_list = Article.objects.all()
+        allTags = Tag.objects.all()
+        latest_10_Articles = Article.objects.all().order_by('-date_time')[:10]
     except Article.DoesNotExist :
         raise Http404
     return render(request, 'archives.html',
                  {'post_list' : post_list,
                   'error' : False,
                   'site':site, 
-                  'page':page})
+                  'page':page,
+                  'allTags':allTags, 
+                  'latest_10_Articles':latest_10_Articles})
 
 def detail(request, id):
     page = {'layout':'post'}
     try:
         post = Article.objects.get(id=str(id))
         tags = post.tag.all()
+        allTags = Tag.objects.all()
+        latest_10_Articles = Article.objects.all().order_by('-date_time')[:10]
         # 记得在顶部导入 CommentForm
         form = CommentForm()
         # 获取这篇 post 下的全部评论
@@ -74,7 +84,8 @@ def detail(request, id):
          # 将文章、表单、以及文章下的评论列表作为模板变量传给 detail.html 模板，以便渲染相应数据。
         context = {'post':post, 'tags':tags, 
                     'site':site, 'page':page,
-                    'form':form, 'comment_list':comment_list}
+                    'form':form, 'comment_list':comment_list,
+                    'allTags':allTags, 'latest_10_Articles':latest_10_Articles}
     except Article.DoesNotExist:
         raise Http404
     return render(request, 'post.html', context)
@@ -92,10 +103,13 @@ def source(request) :
     try:
         post_class_list = SourceClass.objects.all()
         post_list = Source.objects.all()
+        allTags = Tag.objects.all()
+        latest_10_Articles = Article.objects.all().order_by('-date_time')[:10]
     except Source.DoesNotExist :
         raise Http404
     return render(request, 'source.html', {'post_class_list':post_class_list,
-        'post_list': post_list, 'site':site, 'page':page})
+        'post_list': post_list, 'site':site, 'page':page,
+        'allTags':allTags, 'latest_10_Articles':latest_10_Articles})
 
 
 def search_tag(request, tag) :
@@ -104,9 +118,12 @@ def search_tag(request, tag) :
     try:
         tag_id = tag[0]
         post_list = Article.objects.filter(tag = tag_id) #contains
+        allTags = Tag.objects.all()
+        latest_10_Articles = Article.objects.all().order_by('-date_time')[:10]
     except Article.DoesNotExist :
         raise Http404
-    return render(request, 'tag.html', {'post_list' : post_list, 'site':site, 'page':page})
+    return render(request, 'tag.html', {'post_list' : post_list, 'site':site, 'page':page,
+                    'allTags':allTags, 'latest_10_Articles':latest_10_Articles})
 
 def blog_search(request):
     page = {'layout':'post'}

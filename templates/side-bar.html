@@ -3,14 +3,22 @@
         <i class="fa fa-caret-down"></i>
         <h2>近期文章</h2>
         <ul>
+            {% for Article in latest_10_Articles %}
             <li>
-                <a href="#">一键破解Win7密码</a>
+                <a href="{ Article.url }">{{Article.title}}</a>
             </li>
+            {% endfor %}
         </ul>
     </div>
     <div id="tag_cloud-4" class="widget sidebox widget_tag_cloud">
         <i class="fa fa-caret-down"></i>
         <h2>标签</h2>
-        <div class="tagcloud"></div>
+        <div class="tagcloud">
+            
+            {% for tag in allTags %}
+            <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %} " style="display:inline-block;margin:5px;">{{ tag.tag_name }}</a>
+            {% endfor %}
+        </div>
+
     </div>
 </div>

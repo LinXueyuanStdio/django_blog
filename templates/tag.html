@@ -16,10 +16,11 @@
           <a class="post-list__meta--date date" href="#">{{ post.date_time |date:'Y M d'}}</a>
           &#8226; 
           {% for tag in post.tag.all %}
-            <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}">{{ tag.tag_name }}</a>
+            <a class="post-category post-category-pure" href="{% url 'search_tag' tag=tag %}" >{{ tag.tag_name }}</a>
           {% endfor %}
       </p>
       <br />
     {% endfor %}
+    {% include 'side-bar.html' %}
   </div><!-- /.blog-post -->
 {% endblock %}

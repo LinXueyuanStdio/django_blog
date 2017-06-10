@@ -11,12 +11,22 @@ class CommentForm(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={
-                'placeholder': "名字",
+                'placeholder': "名字*",
+                'class':"input__field input__field--jiro",
+                'type':"text",
             }),
             'email': forms.TextInput(attrs={
-                'placeholder': "邮箱",
+                'placeholder': "邮箱*",
+                'class':"input__field input__field--jiro",
+                'type':"email",
             }),
             'url': forms.TextInput(attrs={
                 'placeholder': "网址",
+                'class':"input__field input__field--jiro",
+                'type':"url",
+            }),
+            'text': forms.Textarea(attrs={
+                'placeholder': '我来评两句~',
+                'class':"input-block-level comt-area",
             }),
         }
